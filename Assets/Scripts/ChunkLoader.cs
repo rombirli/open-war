@@ -4,11 +4,13 @@ using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
-using Random = UnityEngine.Random;
+using Random = System.Random;
+
 
 public class ChunkLoader : MonoBehaviour
 {
-    public List<GameObject> chunks;
+    public GameObject[] chunks;
+    private readonly Random random = new();
 
     public float chunkWidth = 6.5f, chunkHeight = 4;
     private readonly Dictionary<Tuple<int, int>, GameObject> _cache = new();
@@ -48,9 +50,9 @@ public class ChunkLoader : MonoBehaviour
         var coord = new Tuple<int, int>(x, y);
         if (!_cache.TryGetValue(coord, out chunkToLoad))
         {
+            if (chunks.Length == 0) return;
             var position = new Vector3(chunkWidth * x, chunkHeight * y, 0);
-            var index = Random.Range(0, chunks.Count);
-            chunkToLoad = Instantiate(chunks[index], position, Quaternion.identity);
+            chunkToLoad = Instantiate(chunks[random.Next(0, chunks.Length)], position, Quaternion.identity);
             _cache.Add(coord, chunkToLoad);
         }
 
