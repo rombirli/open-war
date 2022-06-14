@@ -27,7 +27,7 @@ public class ChunkLoader : MonoBehaviour
         // 0 - 14,14 
         var playerPos = GameObject.FindWithTag("Player").transform.position;
         var x = (int)(playerPos.x / chunkWidth - (playerPos.x < 0 ? 1 : 0));
-        var y = (int)Math.Round(playerPos.y / chunkHeight - (playerPos.y < 0 ? 1 : 0));
+        var y = (int)Math.Round(playerPos.y / chunkHeight - .5);
         if (x == lastIntersectionX && y == lastIntersectionY) return;
         lastIntersectionX = x;
         lastIntersectionY = y;
