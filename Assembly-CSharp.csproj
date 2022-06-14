@@ -41,14 +41,14 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
-     <Compile Include="Assets\RandomAngle.cs" />
-     <Compile Include="Assets\Scripts\GameManager.cs" />
-     <Compile Include="Assets\Turret.cs" />
-     <Compile Include="Assets\Hitable.cs" />
+     <Compile Include="Assets\Scripts\RandomAngle.cs" />
+     <Compile Include="Assets\Scripts\ChunkLoader.cs" />
+     <Compile Include="Assets\Scripts\Turret.cs" />
+     <Compile Include="Assets\Scripts\Hitable.cs" />
      <Compile Include="Assets\Scripts\DestroyOnExit.cs" />
-     <Compile Include="Assets\FollowPlayer.cs" />
-     <Compile Include="Assets\BrownTank.cs" />
-     <Compile Include="Assets\Bullet.cs" />
+     <Compile Include="Assets\Scripts\FollowPlayer.cs" />
+     <Compile Include="Assets\Scripts\BrownTank.cs" />
+     <Compile Include="Assets\Scripts\Bullet.cs" />
      <Reference Include="UnityEngine">
      <HintPath>C:\Program Files\Unity\Hub\Editor\2021.3.1f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
      </Reference>
@@ -697,8 +697,14 @@
      <Reference Include="Unity.2D.Tilemap.Editor">
      <HintPath>C:\Users\Romain\Documents\EPFL_documents\IPS\open war\Library\ScriptAssemblies\Unity.2D.Tilemap.Editor.dll</HintPath>
      </Reference>
+     <Reference Include="UnityEditor.CacheServer">
+     <HintPath>C:\Users\Romain\Documents\EPFL_documents\IPS\open war\Library\ScriptAssemblies\UnityEditor.CacheServer.dll</HintPath>
+     </Reference>
      <Reference Include="PsdPlugin">
      <HintPath>C:\Users\Romain\Documents\EPFL_documents\IPS\open war\Library\ScriptAssemblies\PsdPlugin.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.Addressables">
+     <HintPath>C:\Users\Romain\Documents\EPFL_documents\IPS\open war\Library\ScriptAssemblies\Unity.Addressables.dll</HintPath>
      </Reference>
      <Reference Include="Unity.TextMeshPro.Editor">
      <HintPath>C:\Users\Romain\Documents\EPFL_documents\IPS\open war\Library\ScriptAssemblies\Unity.TextMeshPro.Editor.dll</HintPath>
@@ -730,8 +736,8 @@
      <Reference Include="Unity.2D.Path.Editor">
      <HintPath>C:\Users\Romain\Documents\EPFL_documents\IPS\open war\Library\ScriptAssemblies\Unity.2D.Path.Editor.dll</HintPath>
      </Reference>
-     <Reference Include="Unity.VisualScripting.SettingsProvider.Editor">
-     <HintPath>C:\Users\Romain\Documents\EPFL_documents\IPS\open war\Library\ScriptAssemblies\Unity.VisualScripting.SettingsProvider.Editor.dll</HintPath>
+     <Reference Include="Unity.ResourceManager">
+     <HintPath>C:\Users\Romain\Documents\EPFL_documents\IPS\open war\Library\ScriptAssemblies\Unity.ResourceManager.dll</HintPath>
      </Reference>
      <Reference Include="Unity.VisualScripting.Flow">
      <HintPath>C:\Users\Romain\Documents\EPFL_documents\IPS\open war\Library\ScriptAssemblies\Unity.VisualScripting.Flow.dll</HintPath>
@@ -739,14 +745,14 @@
      <Reference Include="UnityEditor.UI">
      <HintPath>C:\Users\Romain\Documents\EPFL_documents\IPS\open war\Library\ScriptAssemblies\UnityEditor.UI.dll</HintPath>
      </Reference>
-     <Reference Include="Unity.PlasticSCM.Editor">
-     <HintPath>C:\Users\Romain\Documents\EPFL_documents\IPS\open war\Library\ScriptAssemblies\Unity.PlasticSCM.Editor.dll</HintPath>
+     <Reference Include="Unity.VisualScripting.SettingsProvider.Editor">
+     <HintPath>C:\Users\Romain\Documents\EPFL_documents\IPS\open war\Library\ScriptAssemblies\Unity.VisualScripting.SettingsProvider.Editor.dll</HintPath>
      </Reference>
      <Reference Include="Unity.Rider.Editor">
      <HintPath>C:\Users\Romain\Documents\EPFL_documents\IPS\open war\Library\ScriptAssemblies\Unity.Rider.Editor.dll</HintPath>
      </Reference>
-     <Reference Include="Unity.2D.Psdimporter.Editor">
-     <HintPath>C:\Users\Romain\Documents\EPFL_documents\IPS\open war\Library\ScriptAssemblies\Unity.2D.Psdimporter.Editor.dll</HintPath>
+     <Reference Include="Unity.PlasticSCM.Editor">
+     <HintPath>C:\Users\Romain\Documents\EPFL_documents\IPS\open war\Library\ScriptAssemblies\Unity.PlasticSCM.Editor.dll</HintPath>
      </Reference>
      <Reference Include="UnityEngine.UI">
      <HintPath>C:\Users\Romain\Documents\EPFL_documents\IPS\open war\Library\ScriptAssemblies\UnityEngine.UI.dll</HintPath>
@@ -754,8 +760,8 @@
      <Reference Include="Unity.2D.Tilemap.Extras.Editor">
      <HintPath>C:\Users\Romain\Documents\EPFL_documents\IPS\open war\Library\ScriptAssemblies\Unity.2D.Tilemap.Extras.Editor.dll</HintPath>
      </Reference>
-     <Reference Include="Unity.InternalAPIEditorBridge.001">
-     <HintPath>C:\Users\Romain\Documents\EPFL_documents\IPS\open war\Library\ScriptAssemblies\Unity.InternalAPIEditorBridge.001.dll</HintPath>
+     <Reference Include="Unity.2D.Psdimporter.Editor">
+     <HintPath>C:\Users\Romain\Documents\EPFL_documents\IPS\open war\Library\ScriptAssemblies\Unity.2D.Psdimporter.Editor.dll</HintPath>
      </Reference>
      <Reference Include="Unity.VisualScripting.Core">
      <HintPath>C:\Users\Romain\Documents\EPFL_documents\IPS\open war\Library\ScriptAssemblies\Unity.VisualScripting.Core.dll</HintPath>
@@ -772,6 +778,9 @@
      <Reference Include="Unity.VisualScripting.Shared.Editor">
      <HintPath>C:\Users\Romain\Documents\EPFL_documents\IPS\open war\Library\ScriptAssemblies\Unity.VisualScripting.Shared.Editor.dll</HintPath>
      </Reference>
+     <Reference Include="Unity.InternalAPIEditorBridge.001">
+     <HintPath>C:\Users\Romain\Documents\EPFL_documents\IPS\open war\Library\ScriptAssemblies\Unity.InternalAPIEditorBridge.001.dll</HintPath>
+     </Reference>
      <Reference Include="Unity.2D.Animation.Runtime">
      <HintPath>C:\Users\Romain\Documents\EPFL_documents\IPS\open war\Library\ScriptAssemblies\Unity.2D.Animation.Runtime.dll</HintPath>
      </Reference>
@@ -787,8 +796,17 @@
      <Reference Include="Unity.2D.Common.Runtime">
      <HintPath>C:\Users\Romain\Documents\EPFL_documents\IPS\open war\Library\ScriptAssemblies\Unity.2D.Common.Runtime.dll</HintPath>
      </Reference>
+     <Reference Include="Unity.ScriptableBuildPipeline">
+     <HintPath>C:\Users\Romain\Documents\EPFL_documents\IPS\open war\Library\ScriptAssemblies\Unity.ScriptableBuildPipeline.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.Addressables.Editor">
+     <HintPath>C:\Users\Romain\Documents\EPFL_documents\IPS\open war\Library\ScriptAssemblies\Unity.Addressables.Editor.dll</HintPath>
+     </Reference>
      <Reference Include="Unity.2D.SpriteShape.Editor">
      <HintPath>C:\Users\Romain\Documents\EPFL_documents\IPS\open war\Library\ScriptAssemblies\Unity.2D.SpriteShape.Editor.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.ScriptableBuildPipeline.Editor">
+     <HintPath>C:\Users\Romain\Documents\EPFL_documents\IPS\open war\Library\ScriptAssemblies\Unity.ScriptableBuildPipeline.Editor.dll</HintPath>
      </Reference>
      <Reference Include="Unity.2D.Common.Editor">
      <HintPath>C:\Users\Romain\Documents\EPFL_documents\IPS\open war\Library\ScriptAssemblies\Unity.2D.Common.Editor.dll</HintPath>
