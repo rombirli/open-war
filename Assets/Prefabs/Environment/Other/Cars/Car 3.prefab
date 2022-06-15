@@ -71,8 +71,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1017592609
-  m_SortingLayer: 3
+  m_SortingLayerID: -439118193
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 2bfbaf49e200c32468dd4b9eba74592c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -135,7 +135,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthPoints: 1
   alive: {fileID: 6880399286132384459}
-  removeColliderOnDestroy: 0
+  removeColliderOnDestroy: 1
   dead: {fileID: 1878814413350348940}
 --- !u!50 &577627312885290810
 Rigidbody2D:
@@ -150,8 +150,8 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 5
-  m_AngularDrag: 5
+  m_LinearDrag: 3
+  m_AngularDrag: 3
   m_GravityScale: 1
   m_Material: {fileID: 6200000, guid: 39abf4b7c65217646bfa38e96e378f62, type: 2}
   m_Interpolate: 0
@@ -337,11 +337,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8478622418475571852, guid: c2e82bccc2e31a2438eab21b280b072d, type: 3}
       propertyPath: m_SortingLayer
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8478622418475571852, guid: c2e82bccc2e31a2438eab21b280b072d, type: 3}
       propertyPath: m_SortingLayerID
-      value: -1017592609
+      value: -439118193
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c2e82bccc2e31a2438eab21b280b072d, type: 3}

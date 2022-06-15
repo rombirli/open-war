@@ -22,7 +22,7 @@ public class Bullet : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D col)
     {
-        // if (col.gameObject.CompareTag("Player")) return;
+        if (col.gameObject.CompareTag("Collectable")) return;
         Instantiate(explosionPrefab,
             transform.position,
             explosionPrefab.transform.rotation);

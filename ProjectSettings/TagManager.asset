@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Explosion
+  - Collectable
   layers:
   - Default
   - TransparentFX
@@ -53,6 +54,9 @@ TagManager:
     locked: 0
   - name: Buildings
     uniqueID: 3962831451
+    locked: 0
+  - name: Collectable
+    uniqueID: 1297527129
     locked: 0
   - name: Player
     uniqueID: 2084375719

@@ -29,13 +29,13 @@ public class Turret : MonoBehaviour
         if (hit.collider != null && hit.collider.gameObject != null)
         {
             if (hit.collider.gameObject.CompareTag("Player"))
-                tryShoot();
+                TryShoot();
         }
     }
 
     private float _nextShoot = 0;
 
-    void tryShoot()
+    void TryShoot()
     {
         if (_nextShoot > Time.time) return;
         _nextShoot = Time.time + delayBetweenShoots;

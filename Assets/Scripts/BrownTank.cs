@@ -15,6 +15,7 @@ public class BrownTank : MonoBehaviour
     public GameObject canon;
     public GameObject wheelLeft, wheelRight;
     public GameObject turret;
+    public GameObject flameThrower;
     
     // Start is called before the first frame update
     void Start()
@@ -78,6 +79,7 @@ public class BrownTank : MonoBehaviour
         mousePos = new Vector3(mousePos.x, mousePos.y, 0);
         if (Input.GetMouseButtonDown((int)MouseButton.Left))
             Instantiate(explosionPrefab, mousePos, explosionPrefab.transform.rotation);
+        flameThrower.SetActive(Input.GetMouseButton((int)MouseButton.Right));
         turret.transform.up = (mousePos - turret.transform.position).normalized;
     }
 
