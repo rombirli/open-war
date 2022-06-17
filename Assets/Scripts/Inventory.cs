@@ -9,7 +9,9 @@ public static class Inventory
         Coin,
         Star,
         Key,
-        Health
+        Health,
+        Freeze,
+        Trap
     }
 
     private static readonly Dictionary<Item, int> ItemToCount =
@@ -23,15 +25,15 @@ public static class Inventory
         ((int[])Enum.GetValues(typeof(Item))).ToDictionary(item => (Item)item, item => 0);
 
     private static Dictionary<Item, int> LoadItemToCapacity() =>
-        ((int[])Enum.GetValues(typeof(Item))).ToDictionary(item => (Item)item, item => 10);
+        ((int[])Enum.GetValues(typeof(Item))).ToDictionary(item => (Item)item, item => 100);
 
 
     public static int GetCount(Item item) => ItemToCount[item];
-    private static int GetCapacity(Item item) => ItemToCapacity[item];
+    public static int GetCapacity(Item item) => ItemToCapacity[item];
 
     public static bool Put(Item item)
     {
-        if (GetCount(item) >= GetCapacity(item))
+        if (GetCount(item) < GetCapacity(item))
         {
             ItemToCount[item]++;
             return true;

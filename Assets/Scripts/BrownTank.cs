@@ -16,11 +16,12 @@ public class BrownTank : MonoBehaviour
     public GameObject wheelLeft, wheelRight;
     public GameObject turret;
     public GameObject flameThrower;
-    
+
     // Start is called before the first frame update
     void Start()
     {
         gameObject.tag = "Player";
+        for (int i = 0; i < Inventory.GetCapacity(Inventory.Item.Health); i++) Inventory.Put(Inventory.Item.Health);
     }
 
     private float _nextShoot = 0;
@@ -49,6 +50,7 @@ public class BrownTank : MonoBehaviour
         {
             _nextShoot = Math.Max(_nextShoot, Time.time + delayBetweenShoots);
         }
+
         if (Input.GetKey(KeyCode.Space) && Time.time >= _nextShoot)
         {
             Shoot();
@@ -71,6 +73,15 @@ public class BrownTank : MonoBehaviour
         wheelRight.GetComponent<Animator>().SetBool(Turning, move != 0 || rotation != 0);
         wheelRight.GetComponent<Animator>().SetBool(Backward, move < 0 || rotation < 0);
     }
+
+    void OnTriggerEnter2D(Collider2D col)
+    {
+        if (col.gameObject.CompareTag("Explosion"))
+        {
+            if (!Inventory.Pop(Inventory.Item.Health)) /*TODO player die*/ ;
+        }
+    }
+
 
     private void UpdateTurret()
     {
