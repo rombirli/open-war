@@ -23,7 +23,7 @@ public static class Inventory
         ((int[])Enum.GetValues(typeof(Item))).ToDictionary(item => (Item)item, item => 0);
 
     private static Dictionary<Item, int> LoadItemToCapacity() =>
-        ((int[])Enum.GetValues(typeof(Item))).ToDictionary(item => (Item)item, item => 0);
+        ((int[])Enum.GetValues(typeof(Item))).ToDictionary(item => (Item)item, item => 10);
 
 
     public static int GetCount(Item item) => ItemToCount[item];
