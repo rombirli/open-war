@@ -17,33 +17,25 @@ public class BrownTank : MonoBehaviour
     public GameObject turret;
     public GameObject flameThrower;
     public List<GameObject> destroyed;
-    public GameObject freshPlayer;
 
-    private bool _dead = false;
     // Start is called before the first frame update
     void Start()
     {
         gameObject.tag = "Player";
-        resetInventory();
+        Inventory.ResetInventory();
     }
 
-    private void resetInventory()
-    {
-        foreach (var item in new[] { Inventory.Item.MainAmmo, Inventory.Item.TurretAmmo, Inventory.Item.Health })
-            for (var i = 0; i < Inventory.GetCapacity(item); i++)
-                Inventory.Put(item);
-    }
 
     private float _nextShot = 0;
     public GameObject bulletPrefab;
     private static readonly int Turning = Animator.StringToHash("turning");
     private static readonly int Backward = Animator.StringToHash("backward");
+    private bool _dead = false;
 
     // Update is called once per frame
     void Update()
     {
-        if (_dead)
-            return;
+        if (_dead) return;
         GetInputs(out var move, out var rotation);
         TurnAndMove(move, rotation);
         UpdateWheels(move, rotation);
@@ -93,9 +85,6 @@ public class BrownTank : MonoBehaviour
             if (!Inventory.Pop(Inventory.Item.Health))
             {
                 _dead = true;
-                resetInventory();
-                Instantiate(freshPlayer, Vector3.zero, Quaternion.identity);
-                gameObject.tag = "Untagged";
                 destroyed.ForEach(go => go.SetActive(true));
                 flameThrower.SetActive(false);
             }

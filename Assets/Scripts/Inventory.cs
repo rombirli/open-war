@@ -55,4 +55,11 @@ public static class Inventory
 
         return false;
     }
+    
+    public static void ResetInventory()
+    {
+        foreach (var item in new[] { Item.MainAmmo, Item.TurretAmmo, Item.Health })
+            for (var i = 0; i < GetCapacity(item); i++)
+                Put(item);
+    }
 }
