@@ -1,0 +1,61 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7691282484171256342
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8570378194047859844}
+  - component: {fileID: 5417154446992520373}
+  m_Layer: 0
+  m_Name: Dropper
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8570378194047859844
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7691282484171256342}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5417154446992520373
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7691282484171256342}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d841145e3b9ac741856d415a33e45da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemsWithWeight:
+  - item: {fileID: 2223878630722187703, guid: 01b4d3ae3bdd7ef4d9f0467f2c5ccfc0, type: 3}
+    weight: 1
+  - item: {fileID: 3460986214330775400, guid: 0a725091b920a5b4d9ea565c09aa593b, type: 3}
+    weight: 1
+  - item: {fileID: 2126539564713026911, guid: 6df5b339f76f4cb4dae28053e009b8f4, type: 3}
+    weight: 1
+  - item: {fileID: 3725746963962845459, guid: dddaebe0d9a3e6244b539ed4014d1f3c, type: 3}
+    weight: 1
+  - item: {fileID: 2726962800947226421, guid: 7a84d545aab73ca40871483307b16dbb, type: 3}
+    weight: 1
+  - item: {fileID: 4702254540414311379, guid: 2516d55b37308da4d87ac6f93a5301bc, type: 3}
+    weight: 1
+  - item: {fileID: 5323263199794746736, guid: 3ad3a2cef10c2cb48825221b5d308f6c, type: 3}
+    weight: 1
