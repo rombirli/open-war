@@ -8,10 +8,15 @@ using UnityEngine.Serialization;
 public class Collectable : MonoBehaviour
 {
     public Inventory.Item item;
+    public int count = 1;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Player") && Inventory.Put(item))
+        if (other.gameObject.CompareTag("Player") && Inventory.GetCapacity(item) > Inventory.GetCount(item))
+        {
+            for (var i = 0; i < count; i++)
+                Inventory.Pop(item);
             Destroy(gameObject);
+        }
     }
 }

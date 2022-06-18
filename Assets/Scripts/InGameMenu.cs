@@ -6,13 +6,9 @@ public class InGameMenu : MonoBehaviour
 {
     public GameObject fullInventoryMenu;
     public GameObject smallInventoryMenu;
-    // Start is called before the first frame update
-    void Start()
-    {
-    }
 
     // Update is called once per frame
-    void Update()
+    public void Update()
     {
         var inventoryMenuOpen = Input.GetKey(KeyCode.E);
         smallInventoryMenu.SetActive(!inventoryMenuOpen);

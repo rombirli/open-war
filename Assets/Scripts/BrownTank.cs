@@ -16,15 +16,25 @@ public class BrownTank : MonoBehaviour
     public GameObject wheelLeft, wheelRight;
     public GameObject turret;
     public GameObject flameThrower;
+    public List<GameObject> destroyed;
+    public GameObject freshPlayer;
 
+    private bool _dead = false;
     // Start is called before the first frame update
     void Start()
     {
         gameObject.tag = "Player";
-        for (int i = 0; i < Inventory.GetCapacity(Inventory.Item.Health); i++) Inventory.Put(Inventory.Item.Health);
+        resetInventory();
     }
 
-    private float _nextShoot = 0;
+    private void resetInventory()
+    {
+        foreach (var item in new[] { Inventory.Item.MainAmmo, Inventory.Item.TurretAmmo, Inventory.Item.Health })
+            for (var i = 0; i < Inventory.GetCapacity(item); i++)
+                Inventory.Put(item);
+    }
+
+    private float _nextShot = 0;
     public GameObject bulletPrefab;
     private static readonly int Turning = Animator.StringToHash("turning");
     private static readonly int Backward = Animator.StringToHash("backward");
@@ -32,6 +42,8 @@ public class BrownTank : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (_dead)
+            return;
         GetInputs(out var move, out var rotation);
         TurnAndMove(move, rotation);
         UpdateWheels(move, rotation);
@@ -48,13 +60,13 @@ public class BrownTank : MonoBehaviour
         if (Input.GetKey(KeyCode.S)) move--;
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            _nextShoot = Math.Max(_nextShoot, Time.time + delayBetweenShoots);
+            _nextShot = Math.Max(_nextShot, Time.time + delayBetweenShoots);
         }
 
-        if (Input.GetKey(KeyCode.Space) && Time.time >= _nextShoot)
+        if (Input.GetKey(KeyCode.Space) && Time.time >= _nextShot)
         {
             Shoot();
-            _nextShoot += delayBetweenShoots;
+            _nextShot += delayBetweenShoots;
         }
     }
 
@@ -78,7 +90,15 @@ public class BrownTank : MonoBehaviour
     {
         if (col.gameObject.CompareTag("Explosion"))
         {
-            if (!Inventory.Pop(Inventory.Item.Health)) /*TODO player die*/ ;
+            if (!Inventory.Pop(Inventory.Item.Health))
+            {
+                _dead = true;
+                resetInventory();
+                Instantiate(freshPlayer, Vector3.zero, Quaternion.identity);
+                gameObject.tag = "Untagged";
+                destroyed.ForEach(go => go.SetActive(true));
+                flameThrower.SetActive(false);
+            }
         }
     }
 
@@ -89,15 +109,23 @@ public class BrownTank : MonoBehaviour
         var mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         mousePos = new Vector3(mousePos.x, mousePos.y, 0);
         if (Input.GetMouseButtonDown((int)MouseButton.Left))
-            Instantiate(explosionPrefab, mousePos, explosionPrefab.transform.rotation);
+            ShootTurret(mousePos);
         flameThrower.SetActive(Input.GetMouseButton((int)MouseButton.Right));
         turret.transform.up = (mousePos - turret.transform.position).normalized;
     }
 
+    private void ShootTurret(Vector3 mousePos)
+    {
+        if (Inventory.Pop(Inventory.Item.TurretAmmo))
+            Instantiate(explosionPrefab, mousePos, explosionPrefab.transform.rotation);
+    }
+
+
     private void Shoot()
     {
-        Instantiate(bulletPrefab,
-            canon.transform.position,
-            transform.rotation);
+        if (Inventory.Pop(Inventory.Item.MainAmmo))
+            Instantiate(bulletPrefab,
+                canon.transform.position,
+                transform.rotation);
     }
 }

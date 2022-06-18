@@ -6,13 +6,15 @@ public static class Inventory
 {
     public enum Item
     {
-        Coin,
-        Star,
-        Key,
         Health,
-        Freeze,
+        MainAmmo,
+        TurretAmmo,
+        Coin,
+        Key,
         Trap
     }
+
+    static public readonly Item[] Items = (Item[])Enum.GetValues(typeof(Item));
 
     private static readonly Dictionary<Item, int> ItemToCount =
         LoadItemToCount();
@@ -22,10 +24,10 @@ public static class Inventory
         LoadItemToCapacity();
 
     private static Dictionary<Item, int> LoadItemToCount() =>
-        ((int[])Enum.GetValues(typeof(Item))).ToDictionary(item => (Item)item, item => 0);
+        Items.ToDictionary(item => item, _ => 0);
 
     private static Dictionary<Item, int> LoadItemToCapacity() =>
-        ((int[])Enum.GetValues(typeof(Item))).ToDictionary(item => (Item)item, item => 100);
+        Items.ToDictionary(item => item, _ => 100);
 
 
     public static int GetCount(Item item) => ItemToCount[item];
@@ -38,7 +40,8 @@ public static class Inventory
             ItemToCount[item]++;
             return true;
         }
-        else return false;
+
+        return false;
     }
 
 
@@ -49,6 +52,7 @@ public static class Inventory
             ItemToCount[item]--;
             return true;
         }
-        else return false;
+
+        return false;
     }
 }

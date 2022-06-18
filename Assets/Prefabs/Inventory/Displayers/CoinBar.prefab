@@ -393,7 +393,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textMeshPro: {fileID: 4432760360064093875}
   slider: {fileID: 7935521365268184234}
-  item: 0
+  item: 3
 --- !u!1 &7935521365841664464
 GameObject:
   m_ObjectHideFlags: 0
