@@ -15,7 +15,7 @@ public class Collectable : MonoBehaviour
         if (other.gameObject.CompareTag("Player") && Inventory.GetCapacity(item) > Inventory.GetCount(item))
         {
             for (var i = 0; i < count; i++)
-                Inventory.Pop(item);
+                Inventory.Put(item);
             Destroy(gameObject);
         }
     }
