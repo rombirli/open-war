@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class InGameMenu : MonoBehaviour
@@ -8,6 +9,8 @@ public class InGameMenu : MonoBehaviour
     public GameObject smallInventoryMenu;
     public GameObject freshPlayer;
     public GameObject deadMenu;
+
+    public TextMeshProUGUI deadMenuInfos;
     // public GameObject pauseMenu;
 
     // Update is called once per frame

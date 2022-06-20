@@ -268,7 +268,6 @@ MonoBehaviour:
   destroyed:
   - {fileID: 1557547959580747837}
   - {fileID: 3010766557331051468}
-  freshPlayer: {fileID: 9000622472375085499}
   bulletPrefab: {fileID: 5363905978855313631, guid: 0859e08a9c31fdc4bb73e491c98911b9, type: 3}
 --- !u!50 &9000622472375085498
 Rigidbody2D:
@@ -798,6 +797,10 @@ PrefabInstance:
     - target: {fileID: 4065979296867169568, guid: 14b12207d0ffe714ca096b077cb68042, type: 3}
       propertyPath: m_Name
       value: flamethrower
+      objectReference: {fileID: 0}
+    - target: {fileID: 7437060598460116000, guid: 14b12207d0ffe714ca096b077cb68042, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 14b12207d0ffe714ca096b077cb68042, type: 3}

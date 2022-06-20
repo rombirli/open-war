@@ -474,6 +474,8 @@ MonoBehaviour:
   chunks:
   - {fileID: 7916834787403291245, guid: e67f45a776df85e4998c5e1809c0f6f3, type: 3}
   - {fileID: 7916834787403291245, guid: 6a0f7ed9fa1f2524db0c4858488fa2b3, type: 3}
+  - {fileID: 7916834787403291245, guid: 755889d236baab0448b110fb14f61934, type: 3}
+  - {fileID: 7916834787403291245, guid: 60a7476f3379f27409551d52320d7dfa, type: 3}
   chunkWidth: 14
   chunkHeight: 10
 --- !u!4 &437935251
@@ -1089,6 +1091,7 @@ MonoBehaviour:
   smallInventoryMenu: {fileID: 591767617}
   freshPlayer: {fileID: 9000622472375085499, guid: f252f0a52d8671743bc93be5f4b1e9c3, type: 3}
   deadMenu: {fileID: 1333156797}
+  deadMenuInfos: {fileID: 0}
 --- !u!1 &1014712096
 GameObject:
   m_ObjectHideFlags: 0
