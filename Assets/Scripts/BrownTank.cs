@@ -18,6 +18,8 @@ public class BrownTank : MonoBehaviour
     public GameObject flameThrower;
     public List<GameObject> destroyed;
 
+    private bool _dead;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -34,10 +36,12 @@ public class BrownTank : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (_dead) return;
         if (Inventory.GetCount(Inventory.Item.Health) <= 0)
         {
             destroyed.ForEach(go => go.SetActive(true));
             flameThrower.SetActive(false);
+            _dead = true;
             return;
         }
         GetInputs(out var move, out var rotation);

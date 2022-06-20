@@ -13,7 +13,7 @@ public static class Inventory
         Key = 4
     }
 
-    static public readonly Item[] Items = (Item[])Enum.GetValues(typeof(Item));
+    public static readonly Item[] Items = (Item[])Enum.GetValues(typeof(Item));
 
     private static readonly Dictionary<Item, int> ItemToCount =
         LoadItemToCount();
