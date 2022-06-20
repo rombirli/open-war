@@ -6,12 +6,11 @@ public static class Inventory
 {
     public enum Item
     {
-        Health,
-        MainAmmo,
-        TurretAmmo,
-        Coin,
-        Key,
-        Trap
+        Health = 0,
+        MainAmmo = 1,
+        TurretAmmo = 2,
+        Coin = 3,
+        Key = 4
     }
 
     static public readonly Item[] Items = (Item[])Enum.GetValues(typeof(Item));
@@ -55,7 +54,7 @@ public static class Inventory
 
         return false;
     }
-    
+
     public static void ResetInventory()
     {
         foreach (var item in new[] { Item.MainAmmo, Item.TurretAmmo, Item.Health })

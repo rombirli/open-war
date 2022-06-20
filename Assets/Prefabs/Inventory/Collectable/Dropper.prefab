@@ -46,7 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemsWithWeight:
   - item: {fileID: 2223878630722187703, guid: 01b4d3ae3bdd7ef4d9f0467f2c5ccfc0, type: 3}
-    weight: 1
+    weight: 10
   - item: {fileID: 3460986214330775400, guid: 0a725091b920a5b4d9ea565c09aa593b, type: 3}
     weight: 1
   - item: {fileID: 2126539564713026911, guid: 6df5b339f76f4cb4dae28053e009b8f4, type: 3}

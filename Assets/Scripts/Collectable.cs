@@ -12,11 +12,23 @@ public class Collectable : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Player") && Inventory.GetCapacity(item) > Inventory.GetCount(item))
+        if (other.gameObject.CompareTag("Player"))
         {
-            for (var i = 0; i < count; i++)
-                Inventory.Put(item);
-            Destroy(gameObject);
+            if (count > 0)
+            {
+                if (Inventory.GetCapacity(item) > Inventory.GetCount(item))
+                {
+                    for (var i = 0; i < count; i++)
+                        Inventory.Put(item);
+                    Destroy(gameObject);
+                }
+            }
+            else
+            {
+                for (var i = 0; i < -count; i++)
+                    Inventory.Pop(item);
+                Destroy(gameObject);
+            }
         }
     }
 }

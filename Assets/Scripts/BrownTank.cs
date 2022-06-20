@@ -30,12 +30,16 @@ public class BrownTank : MonoBehaviour
     public GameObject bulletPrefab;
     private static readonly int Turning = Animator.StringToHash("turning");
     private static readonly int Backward = Animator.StringToHash("backward");
-    private bool _dead = false;
 
     // Update is called once per frame
     void Update()
     {
-        if (_dead) return;
+        if (Inventory.GetCount(Inventory.Item.Health) <= 0)
+        {
+            destroyed.ForEach(go => go.SetActive(true));
+            flameThrower.SetActive(false);
+            return;
+        }
         GetInputs(out var move, out var rotation);
         TurnAndMove(move, rotation);
         UpdateWheels(move, rotation);
@@ -82,12 +86,7 @@ public class BrownTank : MonoBehaviour
     {
         if (col.gameObject.CompareTag("Explosion"))
         {
-            if (!Inventory.Pop(Inventory.Item.Health))
-            {
-                _dead = true;
-                destroyed.ForEach(go => go.SetActive(true));
-                flameThrower.SetActive(false);
-            }
+            Inventory.Pop(Inventory.Item.Health);
         }
     }
 
