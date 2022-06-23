@@ -20,6 +20,7 @@ public class InGameMenu : MonoBehaviour
         smallInventoryMenu.SetActive(!inventoryMenuOpen);
         fullInventoryMenu.SetActive(inventoryMenuOpen);
         deadMenu.SetActive(Inventory.GetCount(Inventory.Item.Health) <= 0);
+        deadMenuInfos.text = $"Time alive : : {0}\nDistance from spawn : {0}\nDamages score : {0}";
     }
 
     public void Respawn()
