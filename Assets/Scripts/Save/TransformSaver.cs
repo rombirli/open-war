@@ -1,7 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using System.Linq;
-using Save;
+
 using UnityEngine;
 
 public class TransformSaver : MonoBehaviour, Savable

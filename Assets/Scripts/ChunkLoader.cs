@@ -37,6 +37,7 @@ public class ChunkLoader : MonoBehaviour
         {
             nextSave = Time.time + 5;
             Save();
+            ClearFarChunks();
         }
 
         var playerPos = GameObject.FindWithTag("Player").transform.position;
@@ -63,11 +64,12 @@ public class ChunkLoader : MonoBehaviour
         if (!_cache.TryGetValue(coord, out chunk))
         {
             int index;
-            if (!ChunkSaver.Load(x, y, out chunk, out index))
+            if (!ChunkSaver.Load(GameManager.CurrentGame, x, y, out chunk, out index))
             {
                 var position = new Vector3(ChunkWidth * x, ChunkHeight * y, 0);
                 index = random.Next(0, Chunks.Length);
                 chunk = Instantiate(Chunks[index], position, Quaternion.identity);
+                ChunkSaver.AddAvailableChunk(GameManager.CurrentGame,coord);
             }
 
             if (chunk == null) return;
@@ -78,9 +80,22 @@ public class ChunkLoader : MonoBehaviour
         chunk.SetActive(true);
     }
 
+    private void ClearFarChunks()
+    {
+        var chunksToRemove = new List<Tuple<int, int>>();
+        foreach (var ((x, y), _) in _cache)
+            if (Math.Abs(x - lastIntersectionX) > 3 || Math.Abs(y - lastIntersectionY) > 3)
+                chunksToRemove.Add(new Tuple<int, int>(x, y));
+        foreach (var chunkPosition in chunksToRemove)
+        {
+            _cache.Remove(chunkPosition);
+            _indexes.Remove(chunkPosition);
+        }
+    }
+
     private void Save()
     {
         foreach (var (pos, chunk) in _cache)
-            chunk.GetComponent<ChunkSaver>().Save(pos.Item1, pos.Item2, _indexes[pos]);
+            chunk.GetComponent<ChunkSaver>().Save(GameManager.CurrentGame, pos.Item1, pos.Item2, _indexes[pos]);
     }
 }

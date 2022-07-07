@@ -1,8 +1,5 @@
-﻿namespace Save
+﻿public interface Savable
 {
-    public interface Savable
-    {
-        public void Save(string path);
-        public void Load(string path);
-    }
+    public void Save(string path);
+    public void Load(string path);
 }
