@@ -28,6 +28,5 @@ public class InGameMenu : MonoBehaviour
         Inventory.ResetInventory();
         GameObject.FindWithTag("Player").tag = "Untagged";
         Instantiate(freshPlayer, Vector3.zero, Quaternion.identity);
-        GameManager.Resume();
     }
 }

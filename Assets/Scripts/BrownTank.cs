@@ -39,6 +39,7 @@ public class BrownTank : MonoBehaviour
         if (_dead) return;
         if (Inventory.GetCount(Inventory.Item.Health) <= 0)
         {
+            // player die
             destroyed.ForEach(go => go.SetActive(true));
             flameThrower.SetActive(false);
             _dead = true;

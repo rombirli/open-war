@@ -22,7 +22,8 @@ public class RandomCollectableDropper : MonoBehaviour
     private void OnEnable()
     {
         if (spawned) return;
-        Instantiate(GetRandomItem(), transform.position, Quaternion.identity);
+        var obj=Instantiate(GetRandomItem(), transform.position, Quaternion.identity);
+        obj.transform.parent = transform.parent;
         spawned = true;
     }
 

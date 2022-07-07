@@ -26,7 +26,15 @@ public static class Inventory
         Items.ToDictionary(item => item, _ => 0);
 
     private static Dictionary<Item, int> LoadItemToCapacity() =>
-        Items.ToDictionary(item => item, _ => 100);
+        new Dictionary<Item, int>()
+        {
+            { Item.Health, 100 },
+            { Item.MainAmmo, 100 },
+            { Item.TurretAmmo, 10 },
+            { Item.Coin, 1000 }, 
+            { Item.Key, 1000 }
+        };
+
 
 
     public static int GetCount(Item item) => ItemToCount[item];

@@ -1,11 +1,12 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Save;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-public class Hitable : MonoBehaviour
+public class Hitable : MonoBehaviour, Savable
 {
     public int healthPoints = 1;
     public GameObject alive;
@@ -39,5 +40,17 @@ public class Hitable : MonoBehaviour
         rigidBody.angularVelocity = 0;
         if (removeColliderOnDestroy)
             Destroy(GetComponent<Collider2D>());
+    }
+
+    public void Save(string path)
+    {
+        PlayerPrefs.SetInt(path, healthPoints);
+    }
+
+    public void Load(string path)
+    {
+        healthPoints=PlayerPrefs.GetInt(path);
+        if (healthPoints <= 0)
+            destroy();
     }
 }

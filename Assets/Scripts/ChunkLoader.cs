@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Save;
 using Unity.VisualScripting;
 using UnityEngine;
 using Random = System.Random;
@@ -9,27 +10,38 @@ using Random = System.Random;
 
 public class ChunkLoader : MonoBehaviour
 {
-    public GameObject[] chunks;
     private readonly Random random = new();
-
-    public float chunkWidth = 6.5f, chunkHeight = 4;
+    public static GameObject[] Chunks;
+    public static readonly float ChunkWidth = 14f;
+    public static readonly float ChunkHeight = 10f;
     private readonly Dictionary<Tuple<int, int>, GameObject> _cache = new();
+    private readonly Dictionary<Tuple<int, int>, int> _indexes = new();
 
-    // Update is called once per frame
     private int lastIntersectionX = 0, lastIntersectionY = 0;
+    private float nextSave;
 
     private void Start()
     {
-        _cache.Add(new Tuple<int, int>(0, 0), new GameObject("Empty chunk - spawn"));
+        Chunks = Resources.LoadAll<GameObject>("Chunks/");
+        var firstChunk = new GameObject("Empty chunk - spawn");
+        firstChunk.AddComponent<ChunkSaver>();
+        _cache.Add(new Tuple<int, int>(0, 0), firstChunk);
+        _indexes.Add(new Tuple<int, int>(0, 0), -1);
         UpdateChunks(0, 0);
+        nextSave = Time.time + 5;
     }
 
     void Update()
     {
-        // 0 - 14,14 
+        if (nextSave >= Time.time)
+        {
+            nextSave = Time.time + 5;
+            Save();
+        }
+
         var playerPos = GameObject.FindWithTag("Player").transform.position;
-        var x = (int)(playerPos.x / chunkWidth - (playerPos.x < 0 ? 1 : 0));
-        var y = (int)Math.Round(playerPos.y / chunkHeight - .5);
+        var x = (int)(playerPos.x / ChunkWidth - (playerPos.x < 0 ? 1 : 0));
+        var y = (int)Math.Round(playerPos.y / ChunkHeight - .5);
         if (x == lastIntersectionX && y == lastIntersectionY) return;
         lastIntersectionX = x;
         lastIntersectionY = y;
@@ -46,16 +58,29 @@ public class ChunkLoader : MonoBehaviour
 
     private void LoadChunk(int x, int y)
     {
-        GameObject chunkToLoad;
+        GameObject chunk;
         var coord = new Tuple<int, int>(x, y);
-        if (!_cache.TryGetValue(coord, out chunkToLoad))
+        if (!_cache.TryGetValue(coord, out chunk))
         {
-            if (chunks.Length == 0) return;
-            var position = new Vector3(chunkWidth * x, chunkHeight * y, 0);
-            chunkToLoad = Instantiate(chunks[random.Next(0, chunks.Length)], position, Quaternion.identity);
-            _cache.Add(coord, chunkToLoad);
+            int index;
+            if (!ChunkSaver.Load(x, y, out chunk, out index))
+            {
+                var position = new Vector3(ChunkWidth * x, ChunkHeight * y, 0);
+                index = random.Next(0, Chunks.Length);
+                chunk = Instantiate(Chunks[index], position, Quaternion.identity);
+            }
+
+            if (chunk == null) return;
+            _cache.Add(coord, chunk);
+            _indexes.Add(coord, index);
         }
 
-        chunkToLoad.SetActive(true);
+        chunk.SetActive(true);
+    }
+
+    private void Save()
+    {
+        foreach (var (pos, chunk) in _cache)
+            chunk.GetComponent<ChunkSaver>().Save(pos.Item1, pos.Item2, _indexes[pos]);
     }
 }

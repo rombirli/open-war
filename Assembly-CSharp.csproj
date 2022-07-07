@@ -45,8 +45,10 @@
      <Compile Include="Assets\Scripts\RandomAngle.cs" />
      <Compile Include="Assets\Scripts\Inventory.cs" />
      <Compile Include="Assets\Scripts\ChunkLoader.cs" />
+     <Compile Include="Assets\Scripts\Save\TransformSaver.cs" />
      <Compile Include="Assets\Scripts\Turret.cs" />
      <Compile Include="Assets\Scripts\Hitable.cs" />
+     <Compile Include="Assets\Scripts\Save\Savable.cs" />
      <Compile Include="Assets\Scripts\Collectable.cs" />
      <Compile Include="Assets\Scripts\GameManager.cs" />
      <Compile Include="Assets\Scripts\DestroyOnExit.cs" />
@@ -57,6 +59,8 @@
      <Compile Include="Assets\Scripts\BrownTank.cs" />
      <Compile Include="Assets\Scripts\RandomCollectableDropper.cs" />
      <Compile Include="Assets\Scripts\Bullet.cs" />
+     <Compile Include="Assets\Scripts\Save\ChunkSaver.cs" />
+     <Compile Include="Assets\Scripts\Game.cs" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader" />
