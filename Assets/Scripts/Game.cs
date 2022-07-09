@@ -26,6 +26,9 @@ public class Game
             return false;
         game = new Game(name);
         SaveGames(games.Concat(new[] { game }));
+        Inventory.ForceSet(Inventory.Item.Health, Inventory.GetCapacity(Inventory.Item.Health));
+        Inventory.ForceSet(Inventory.Item.MainAmmo, Inventory.GetCapacity(Inventory.Item.MainAmmo));
+        Inventory.ForceSet(Inventory.Item.TurretAmmo, Inventory.GetCapacity(Inventory.Item.TurretAmmo));
         return true;
     }
 

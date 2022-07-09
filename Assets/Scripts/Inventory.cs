@@ -63,10 +63,8 @@ public static class Inventory
         return false;
     }
 
-    public static void ResetInventory()
+    public static void ForceSet(Item item, int count)
     {
-        foreach (var item in new[] { Item.MainAmmo, Item.TurretAmmo, Item.Health })
-            for (var i = 0; i < GetCapacity(item); i++)
-                Put(item);
+        ItemToCount[item] = count;
     }
 }

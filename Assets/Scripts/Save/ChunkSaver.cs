@@ -3,44 +3,54 @@ using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
+using Random = System.Random;
+
 
 namespace Save
 {
-    public class ChunkSaver : MonoBehaviour
+    public class ChunkSaver : MonoBehaviour, ISaver
     {
-        public void Save(Game game, int x, int y, int chunkIndex)
+        private GameObject _chunk;
+        private static readonly Random Random = new();
+        public int X { get; set; }
+        public int Y { get; set; }
+        public int Index { get; private set; }
+
+        public void Save(string _)
         {
-            string path = $"{game.Path}/CHUNK:{x},{y}";
-            PlayerPrefs.SetInt(path, chunkIndex);
-            int i = 0;
-            foreach (var savable in transform.GetComponentsInChildren<Savable>())
-                savable.Save($"{path}/OBJ:{i++}");
+            PlayerPrefs.SetInt(Path, Index);
+            _chunk.GetComponent<ISaver>()?.Save(Path);
         }
 
-        public static bool Load(Game game, int x, int y, out GameObject chunk, out int index)
+        public bool Load(string _)
         {
-            var path = $"{game.Path}/CHUNK:{x},{y}";
-            if (!PlayerPrefs.HasKey(path))
+            if (X == 0 && Y == 0)
+                return true;
+            var position = new Vector3(ChunkLoader.ChunkWidth * X, ChunkLoader.ChunkHeight * Y, 0);
+            if (!PlayerPrefs.HasKey(Path))
             {
-                chunk = null;
-                index = -1;
-                return false;
+                // generate random chunk
+                Index = Random.Next(0, ChunkLoader.Chunks.Length);
+                _chunk = Instantiate(ChunkLoader.Chunks[Index], position, Quaternion.identity);
+                AddAvailableChunk();
+            }
+            else
+            {
+                // load existing chunk
+                Index = PlayerPrefs.GetInt(Path);
+                _chunk = Instantiate(ChunkLoader.Chunks[Index], position, Quaternion.identity);
             }
 
-            index = PlayerPrefs.GetInt(path);
-            var position = new Vector3(ChunkLoader.ChunkWidth * x, ChunkLoader.ChunkHeight * y, 0);
-            chunk = Instantiate(ChunkLoader.Chunks[index], position, Quaternion.identity);
-            chunk.transform.position = position;
-            var i = 0;
-            foreach (var savable in chunk.transform.GetComponentsInChildren<Savable>())
-                savable.Load($"{path}/OBJ:{i++}");
-            return true;
+            _chunk.transform.parent = transform;
+            return _chunk.GetComponent<ISaver>().Load(Path);
         }
 
-        public static void AddAvailableChunk(Game game, Tuple<int, int> position) =>
-            PlayerPrefs.SetString($"{game.Path}/AVAILABLE_CHUNKS",
+        private string Path => $"{GameManager.CurrentGame.Path}/CHUNK:{X},{Y}";
+
+        private void AddAvailableChunk() =>
+            PlayerPrefs.SetString($"{GameManager.CurrentGame.Path}/AVAILABLE_CHUNKS",
                 string.Join(";",
-                    GetAvailableChunks(game).Concat(new[] { position })
+                    GetAvailableChunks(GameManager.CurrentGame).Concat(new[] { Tuple.Create(X, Y) })
                         .Select(tuple => $"{tuple.Item1},{tuple.Item2}")));
 
         private static List<Tuple<int, int>> GetAvailableChunks(Game game)

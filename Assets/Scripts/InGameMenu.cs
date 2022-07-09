@@ -25,7 +25,7 @@ public class InGameMenu : MonoBehaviour
 
     public void Respawn()
     {
-        Inventory.ResetInventory();
+        Inventory.ForceSet(Inventory.Item.Health, Inventory.GetCapacity(Inventory.Item.Health));
         GameObject.FindWithTag("Player").tag = "Untagged";
         Instantiate(freshPlayer, Vector3.zero, Quaternion.identity);
     }

@@ -24,7 +24,6 @@ public class BrownTank : MonoBehaviour
     void Start()
     {
         gameObject.tag = "Player";
-        Inventory.ResetInventory();
     }
 
 
