@@ -18,6 +18,7 @@ namespace Save
 
         public void Save(string _)
         {
+            if (X == 0 && Y == 0) return;
             PlayerPrefs.SetInt(Path, Index);
             _chunk.GetComponent<ISaver>()?.Save(Path);
         }
