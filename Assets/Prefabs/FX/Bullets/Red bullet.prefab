@@ -133,7 +133,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   velocity: 5
-  explosionPrefab: {fileID: 6339333219920114425, guid: c66eebc0bcd2d86449a047707a66b3db, type: 3}
+  explosionPrefab: {fileID: 8946531567405345442, guid: dde8eb139c125794d887ecd1572e3a32, type: 3}
 --- !u!58 &7991716619474889238
 CircleCollider2D:
   m_ObjectHideFlags: 0

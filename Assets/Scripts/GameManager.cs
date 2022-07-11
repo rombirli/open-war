@@ -4,7 +4,18 @@ using UnityEngine;
 
 public static class GameManager
 {
+    private static bool _paused = false;
+
+    public static bool Paused
+    {
+        get => _paused;
+
+        set
+        {
+            _paused = value;
+            Time.timeScale = _paused ? 0 : 1;
+        }
+    }
+
     public static Game CurrentGame { get; set; }
-    public static void Pause() => Time.timeScale = 0;
-    public static void Resume() => Time.timeScale = 1;
 }

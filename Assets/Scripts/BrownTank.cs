@@ -44,10 +44,12 @@ public class BrownTank : MonoBehaviour
             _dead = true;
             return;
         }
+
         GetInputs(out var move, out var rotation);
         TurnAndMove(move, rotation);
         UpdateWheels(move, rotation);
-        UpdateTurret();
+        if (!GameManager.Paused)
+            UpdateTurret();
     }
 
     private void GetInputs(out float move, out float rotation)
