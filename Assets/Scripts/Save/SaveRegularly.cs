@@ -24,10 +24,20 @@ namespace Save
             if (Time.time >= _nextSave)
             {
                 _nextSave = Time.time + interval;
-                var i = 0;
-                foreach (var saver in GetComponents<ISaver>())
-                    saver.Save(ChildPath(GameManager.CurrentGame.Path, i++));
+                Save();
             }
+        }
+
+        private void OnDestroy()
+        {
+            Save();
+        }
+
+        private void Save()
+        {
+            var i = 0;
+            foreach (var saver in GetComponents<ISaver>())
+                saver.Save(ChildPath(GameManager.CurrentGame.Path, i++));
         }
 
         private static string ChildPath(string root, int i) => $"{root}/OBJ:{i}";
