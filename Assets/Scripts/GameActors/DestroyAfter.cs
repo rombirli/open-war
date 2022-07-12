@@ -12,12 +12,10 @@ public class DestroyAfter : MonoBehaviour
     {
     }
 
-    private float _aliveTime = 0;
 
     // Update is called once per frame
     void Update()
     {
-        _aliveTime += Time.deltaTime;
-        if (_aliveTime >= destroyAfter) Destroy(gameObject);
+        if (Random.Range(0f, destroyAfter) <= Time.deltaTime ) Destroy(gameObject);
     }
 }

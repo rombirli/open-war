@@ -74,10 +74,10 @@ public class Player : MonoBehaviour
         rigidbody2DComponent.MovePosition(transform.position +
                                           move * speed * Time.deltaTime * transform.up);
     }
-    
+
     void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.gameObject.CompareTag("Explosion"))
+        if (col.gameObject.CompareTag("Explosion") && col.gameObject.GetComponent<PlayerTeam>() == null)
         {
             Inventory.Pop(Inventory.Item.Health);
         }

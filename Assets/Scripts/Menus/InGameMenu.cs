@@ -29,7 +29,7 @@ public class InGameMenu : MonoBehaviour
     // Update is called once per frame
     public void Update()
     {
-        var inventoryMenuOpen = false; // Input.GetKey(KeyCode.E);
+        var inventoryMenuOpen = _input.actions["OpenFullInventory"].inProgress;
         smallInventoryMenu.SetActive(!inventoryMenuOpen);
         fullInventoryMenu.SetActive(inventoryMenuOpen);
         deadMenu.SetActive(Inventory.GetCount(Inventory.Item.Health) <= 0);

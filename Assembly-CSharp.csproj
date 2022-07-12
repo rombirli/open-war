@@ -65,6 +65,8 @@
      <Compile Include="Assets\Scripts\GameActors\Bullet.cs" />
      <Compile Include="Assets\Scripts\Save\Savers\ChildrenRecursiveSaver.cs" />
      <Compile Include="Assets\Scripts\Save\Savers\ChunkSaver.cs" />
+     <Compile Include="Assets\Scripts\GameActors\Emitter.cs" />
+     <Compile Include="Assets\Scripts\GameActors\PlayerTeam.cs" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader" />
