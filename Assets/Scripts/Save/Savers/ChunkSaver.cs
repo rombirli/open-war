@@ -15,6 +15,7 @@ namespace Save
         public int X { get; set; }
         public int Y { get; set; }
         public int Index { get; private set; }
+        private bool _loaded = false;
 
         public void Save(string _)
         {
@@ -25,6 +26,7 @@ namespace Save
 
         public bool Load(string _)
         {
+            if (_loaded) return true;
             if (X == 0 && Y == 0)
                 return true;
             var position = new Vector3(ChunkLoader.ChunkWidth * X, ChunkLoader.ChunkHeight * Y, 0);
@@ -43,6 +45,7 @@ namespace Save
             }
 
             _chunk.transform.parent = transform;
+            _loaded = true;
             return _chunk.GetComponent<ISaver>().Load(Path);
         }
 

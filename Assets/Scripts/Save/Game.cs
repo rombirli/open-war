@@ -29,6 +29,8 @@ public class Game
         Inventory.ForceSet(Inventory.Item.Health, Inventory.GetCapacity(Inventory.Item.Health));
         Inventory.ForceSet(Inventory.Item.MainAmmo, Inventory.GetCapacity(Inventory.Item.MainAmmo));
         Inventory.ForceSet(Inventory.Item.TurretAmmo, Inventory.GetCapacity(Inventory.Item.TurretAmmo));
+        Inventory.ForceSet(Inventory.Item.Coin, 0);
+        Inventory.ForceSet(Inventory.Item.Key, 0);
         return true;
     }
 

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Save;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.Serialization;
 
 public class Hitable : MonoBehaviour, ISaver
@@ -11,6 +12,7 @@ public class Hitable : MonoBehaviour, ISaver
     public int healthPoints = 1;
     public GameObject alive;
     public bool removeColliderOnDestroy = false;
+    public UnityEvent onDie;
 
     public GameObject dead;
 
@@ -40,6 +42,7 @@ public class Hitable : MonoBehaviour, ISaver
         rigidBody.angularVelocity = 0;
         if (removeColliderOnDestroy)
             Destroy(GetComponent<Collider2D>());
+        onDie.Invoke();
     }
 
     public void Save(string path)
