@@ -1,46 +1,38 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Gameplay.Shop;
 using Save;
+using Shop;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.Serialization;
 
 public class Collectable : MonoBehaviour, ISaver
 {
-    public Inventory.Item item;
+    public Consumable item;
     public int count = 1;
     private bool _collected = false;
+    public UnityEvent onCollect;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            if (count > 0)
-            {
-                if (Inventory.GetCapacity(item) > Inventory.GetCount(item))
-                {
-                    for (var i = 0; i < count; i++)
-                        Inventory.Put(item);
-                    Collect();
-                }
-            }
-            else
-            {
-                for (var i = 0; i < -count; i++)
-                    Inventory.Pop(item);
-                Collect();
-            }
+            onCollect.Invoke();
+            MarkAsCollected();
         }
     }
 
-    private void Collect()
+    private void MarkAsCollected()
     {
         _collected = true;
         foreach (var spriteRenderer in GetComponentsInChildren<SpriteRenderer>())
         {
             spriteRenderer.enabled = false;
-        } 
+        }
+
         GetComponent<Collider2D>().enabled = false;
     }
 
@@ -51,10 +43,10 @@ public class Collectable : MonoBehaviour, ISaver
 
     public bool Load(string path)
     {
-        if (!PlayerPrefs.HasKey(path)) 
+        if (!PlayerPrefs.HasKey(path))
             return false;
         if (PlayerPrefs.GetInt(path) == 1)
-            Collect();
+            MarkAsCollected();
         return true;
     }
 }

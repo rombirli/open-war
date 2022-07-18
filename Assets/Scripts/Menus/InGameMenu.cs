@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Gameplay.Shop;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -32,7 +33,7 @@ public class InGameMenu : MonoBehaviour
         var inventoryMenuOpen = _input.actions["OpenFullInventory"].inProgress;
         smallInventoryMenu.SetActive(!inventoryMenuOpen);
         fullInventoryMenu.SetActive(inventoryMenuOpen);
-        deadMenu.SetActive(Inventory.GetCount(Inventory.Item.Health) <= 0);
+        deadMenu.SetActive(Inventory.Health <= 0);
         deadMenuInfos.text = $"Time alive : : {0}\nDistance from spawn : {0}\nDamages score : {0}";
         if (_input.actions["Pause"].triggered)
             Pause();
@@ -40,14 +41,14 @@ public class InGameMenu : MonoBehaviour
 
     public void Pause()
     {
-        handedInputs.SetActive(false);
+        // handedInputs.SetActive(false);
         pauseMenu.SetActive(true);
         GameManager.Paused = true;
     }
 
     public void Resume()
     {
-        handedInputs.SetActive(true);
+        // handedInputs.SetActive(true);
         pauseMenu.SetActive(false);
         GameManager.Paused = false;
     }
@@ -55,13 +56,12 @@ public class InGameMenu : MonoBehaviour
     public void Home()
     {
         GameManager.Paused = false;
-        SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene());
         SceneManager.LoadScene("Menu");
     }
 
     public void Respawn()
     {
-        Inventory.ForceSet(Inventory.Item.Health, Inventory.GetCapacity(Inventory.Item.Health));
+        Inventory.Health = Inventory.MaxHealth;
         GameObject.FindWithTag("Player").tag = "Untagged";
         Instantiate(freshPlayer, Vector3.zero, Quaternion.identity);
     }

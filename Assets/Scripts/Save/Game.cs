@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Gameplay.Shop;
 using Save;
+using Shop;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -25,12 +27,14 @@ public class Game
         if (games.Select(game => game.Name).Contains(name))
             return false;
         game = new Game(name);
+        Bag.Quantities[Consumable.MainAmmo] = Bag.Capacities[Consumable.MainAmmo];
+        Bag.Quantities[Consumable.SecondaryAmmo] = Bag.Capacities[Consumable.SecondaryAmmo];
+        Inventory.Money = 0;
+        Inventory.Gems = 0;
+        Tank.CurrentTank = Tank.FirstTank;
+        Turret.CurrentTurret = Turret.FirstTurret;
+        Inventory.Health = Inventory.MaxHealth;
         SaveGames(games.Concat(new[] { game }));
-        Inventory.ForceSet(Inventory.Item.Health, Inventory.GetCapacity(Inventory.Item.Health));
-        Inventory.ForceSet(Inventory.Item.MainAmmo, Inventory.GetCapacity(Inventory.Item.MainAmmo));
-        Inventory.ForceSet(Inventory.Item.TurretAmmo, Inventory.GetCapacity(Inventory.Item.TurretAmmo));
-        Inventory.ForceSet(Inventory.Item.Coin, 0);
-        Inventory.ForceSet(Inventory.Item.Key, 0);
         return true;
     }
 

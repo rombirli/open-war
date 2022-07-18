@@ -1,3 +1,4 @@
+using Gameplay.Shop;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -7,8 +8,8 @@ public class InventoryItemDisplayer : MonoBehaviour
     public TextMeshProUGUI textMeshPro;
 
     public Slider slider;
-
-    public Inventory.Item item;
+    public float Max { get; set; }
+    public float Value { get; set; }
 
     // Start is called before the first frame update
     void Start()
@@ -18,7 +19,7 @@ public class InventoryItemDisplayer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        slider.value = Inventory.GetCount(item) / (float)Inventory.GetCapacity(item);
-        textMeshPro.SetText($"{Inventory.GetCount(item)}/{Inventory.GetCapacity(item)}");
+        slider.value = Value/ Max;
+        textMeshPro.SetText($"{Inventory.Health}/{Inventory.MaxHealth}");
     }
 }

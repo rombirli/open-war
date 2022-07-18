@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Turret : MonoBehaviour
+public class GameTurret : MonoBehaviour
 {
     public GameObject bulletPrefab;
     public float delayBetweenShoots = 1;

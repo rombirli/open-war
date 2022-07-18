@@ -56,9 +56,6 @@ TagManager:
   - name: Buildings
     uniqueID: 3962831451
     locked: 0
-  - name: Collectable
-    uniqueID: 1297527129
-    locked: 0
   - name: Player
     uniqueID: 2084375719
     locked: 0
