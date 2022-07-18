@@ -31,10 +31,15 @@ namespace Shop
         public Upgrade[] Upgrades => new[] { healthUpgrade, speedUpgrade, damageUpgrade, shootFrequencyUpgrade };
 
         public static readonly Tank FirstTank =
-            new("First Tank", 100, 100, 10, 10, 10);
+            new("First Tank", 100, 100, 10, 10, 10)
+            {
+                availableQuantity = 0,
+                ownedQuantity = 1
+            };
 
         public static readonly Tank SecondTank =
             new("Second Tank", 800, 500, 15, 10, 10);
+
 
         public static readonly Tank[] Tanks =
         {
@@ -48,6 +53,7 @@ namespace Shop
         private static string PathHealthUpgrade(string path) => $"{path}/health";
         private static string PathDamageUpgrade(string path) => $"{path}/damage";
         private static string PathShootFrequencyUpgrade(string path) => $"{path}/shootFrequency";
+
         public override void Save(string path)
         {
             base.Save(path);
@@ -57,13 +63,12 @@ namespace Shop
             shootFrequencyUpgrade.Save(PathShootFrequencyUpgrade(path));
         }
 
-      
+
         public override bool Load(string path) =>
-            base.Load(path) && 
-            speedUpgrade.Load(PathSpeedUpgrade(path)) && 
-            healthUpgrade.Load(PathHealthUpgrade(path)) && 
-            damageUpgrade.Load(PathDamageUpgrade(path)) && 
+            base.Load(path) &&
+            speedUpgrade.Load(PathSpeedUpgrade(path)) &&
+            healthUpgrade.Load(PathHealthUpgrade(path)) &&
+            damageUpgrade.Load(PathDamageUpgrade(path)) &&
             shootFrequencyUpgrade.Load(PathShootFrequencyUpgrade(path));
-        
     }
 }

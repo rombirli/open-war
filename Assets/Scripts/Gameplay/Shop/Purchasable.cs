@@ -28,12 +28,15 @@ namespace Shop
             this.ownedQuantity = ownedQuantity;
         }
 
+        public bool Owned(int n = 1) =>
+            ownedQuantity > 0;
+
         public bool Available(int n = 1) =>
-            Inventory.Money * n >= price && availableQuantity > 0;
+            availableQuantity > 0 && Inventory.Money * n >= price;
 
         public bool Buy(int n = 1)
         {
-            if (!Available(n)) return false;
+            if (!Owned(n)) return false;
             availableQuantity -= n;
             ownedQuantity += n;
             return true;
@@ -42,12 +45,13 @@ namespace Shop
 
         private static string PathOwnedQuantity(string path) => $"{path}/OwnedQuantity";
         private static string PathAvailableQuantity(string path) => $"{path}/AvailableQuantity";
-        
+
         public virtual void Save(string path)
         {
             PlayerPrefs.SetInt(PathOwnedQuantity(path), ownedQuantity);
             PlayerPrefs.SetInt(PathAvailableQuantity(path), availableQuantity);
         }
+
         public virtual bool Load(string path)
         {
             if (!PlayerPrefs.HasKey(PathOwnedQuantity(path)) ||
